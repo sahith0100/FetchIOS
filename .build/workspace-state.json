@@ -1,0 +1,27 @@
+{
+  "object" : {
+    "artifacts" : [
+
+    ],
+    "dependencies" : [
+      {
+        "basedOn" : null,
+        "packageRef" : {
+          "identity" : "viewinspector",
+          "kind" : "remoteSourceControl",
+          "location" : "https://github.com/nalexn/ViewInspector",
+          "name" : "ViewInspector"
+        },
+        "state" : {
+          "checkoutState" : {
+            "revision" : "7b1732802ffe30e6a67754bda6c7819e5cb0eb70",
+            "version" : "0.9.11"
+          },
+          "name" : "sourceControlCheckout"
+        },
+        "subpath" : "ViewInspector"
+      }
+    ]
+  },
+  "version" : 6
+}

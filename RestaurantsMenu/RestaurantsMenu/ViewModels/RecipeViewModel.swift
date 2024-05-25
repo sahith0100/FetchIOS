@@ -4,10 +4,8 @@
 //
 //  Created by Sahith D on 5/23/24.
 //
-
 import Foundation
 import Combine
-
 class RecipeViewModel: ObservableObject {
     @Published var meals: [Meal] = []
     @Published var mealDetail: MealDetail?
@@ -23,7 +21,6 @@ class RecipeViewModel: ObservableObject {
             ]
             return
         }
-        
         URLSession.shared.dataTaskPublisher(for: url)
             .map { $0.data }
             .decode(type: MealsResponse.self, decoder: JSONDecoder())
@@ -48,9 +45,7 @@ class RecipeViewModel: ObservableObject {
             self.mealDetail = MealDetail()
             return
         }
-        
         print("Fetching meal detail for ID: \(id)")
-        
         URLSession.shared.dataTaskPublisher(for: url)
             .map { $0.data }
             .decode(type: MealDetailResponse.self, decoder: JSONDecoder())

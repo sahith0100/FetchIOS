@@ -5,11 +5,9 @@
 //  Created by Sahith D on 5/23/24.
 //
 import SwiftUI
-
 struct MealDetailView: View {
     let mealID: String
     @StateObject private var viewModel = RecipeViewModel()
-    
     var body: some View {
         ScrollView {
             if let mealDetail = viewModel.mealDetail {

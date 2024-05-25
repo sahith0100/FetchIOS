@@ -4,8 +4,6 @@
 //
 //  Created by Sahith D on 5/23/24.
 //
-
-
 import SwiftUI
 struct CustomRoundedImage: ViewModifier {
     func body(content: Content) -> some View {

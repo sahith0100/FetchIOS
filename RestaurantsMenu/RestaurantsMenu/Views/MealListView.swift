@@ -4,10 +4,7 @@
 //
 //  Created by Sahith D on 5/23/24.
 //
-
-
 import SwiftUI
-
 struct MealListView: View {
     @StateObject private var viewModel = RecipeViewModel()
     
@@ -39,7 +36,6 @@ struct MealListView: View {
         }
     }
 }
-
 struct MealListView_Previews: PreviewProvider {
     static var previews: some View {
         MealListView()

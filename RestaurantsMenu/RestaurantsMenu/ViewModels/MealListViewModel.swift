@@ -4,10 +4,8 @@
 //
 //  Created by Sahith D on 5/24/24.
 //
-
 import Foundation
 import Combine
-
 class MealListViewModel: ObservableObject {
     @Published var meals: [Meal] = []
     private var cancellables = Set<AnyCancellable>()

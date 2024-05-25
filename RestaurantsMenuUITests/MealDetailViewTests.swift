@@ -11,7 +11,6 @@ import SwiftUI
 @testable import RestaurantsMenu
 
 extension MealDetailView: Inspectable {}
-
 class MealDetailViewTests: XCTestCase {
     
     func testMealDetailView() throws {
