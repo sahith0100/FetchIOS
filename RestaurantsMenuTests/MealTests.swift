@@ -3,51 +3,48 @@
 //  RestaurantsMenuTests
 //
 //  Created by Sahith D on 5/24/24.
-//
+
 import XCTest
 @testable import RestaurantsMenu
 
 class MealTests: XCTestCase {
 
-    func testMealDecoding() {
+    func testMealDecoding() throws {
         let json = """
         {
-            "idMeal": "53049",
-            "strMeal": "Apam balik",
-            "strMealThumb": "https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg"
+            "idMeal": "52772",
+            "strMeal": "Teriyaki Chicken Casserole",
+            "strMealThumb": "https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg"
         }
-        """
-        let data = json.data(using: .utf8)!
-        let meal = try! JSONDecoder().decode(Meal.self, from: data)
-        
-        XCTAssertEqual(meal.id, "53049")
-        XCTAssertEqual(meal.name, "Apam balik")
-        XCTAssertEqual(meal.thumbnail, "https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg")
+        """.data(using: .utf8)!
+
+        let decoder = JSONDecoder()
+        let meal = try decoder.decode(Meal.self, from: json)
+
+        XCTAssertEqual(meal.id, "52772")
+        XCTAssertEqual(meal.name, "Teriyaki Chicken Casserole")
+        XCTAssertEqual(meal.thumbnail, "https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg")
     }
-}
 
-class MealDetailTests: XCTestCase {
-
-    func testMealDetailDecoding() {
+    func testMealsResponseDecoding() throws {
         let json = """
         {
-            "idMeal": "53049",
-            "strMeal": "Apam balik",
-            "strInstructions": "Mix all ingredients and cook.",
-            "strIngredient1": "Flour",
-            "strIngredient2": "Sugar",
-            "strMeasure1": "1 cup",
-            "strMeasure2": "2 tbsp"
+            "meals": [
+                {
+                    "idMeal": "52772",
+                    "strMeal": "Teriyaki Chicken Casserole",
+                    "strMealThumb": "https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg"
+                }
+            ]
         }
-        """
-        let data = json.data(using: .utf8)!
-        let mealDetail = try! JSONDecoder().decode(MealDetail.self, from: data)
-        
-        XCTAssertEqual(mealDetail.id, "53049")
-        XCTAssertEqual(mealDetail.name, "Apam balik")
-        XCTAssertEqual(mealDetail.instructions, "Mix all ingredients and cook.")
-        XCTAssertEqual(mealDetail.ingredients, ["Flour", "Sugar"])
-        XCTAssertEqual(mealDetail.measurements, ["1 cup", "2 tbsp"])
+        """.data(using: .utf8)!
+
+        let decoder = JSONDecoder()
+        let mealsResponse = try decoder.decode(MealsResponse.self, from: json)
+
+        XCTAssertEqual(mealsResponse.meals.count, 1)
+        XCTAssertEqual(mealsResponse.meals[0].id, "52772")
+        XCTAssertEqual(mealsResponse.meals[0].name, "Teriyaki Chicken Casserole")
+        XCTAssertEqual(mealsResponse.meals[0].thumbnail, "https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg")
     }
 }
-

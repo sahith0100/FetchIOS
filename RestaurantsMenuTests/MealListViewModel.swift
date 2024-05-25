@@ -1,21 +1,22 @@
 //
-//  RecipeViewModelTests.swift
+//  MealListViewModel.swift
 //  RestaurantsMenuTests
 //
-//  Created by Sahith D on 5/24/24.
+//  Created by Sahith D on 5/25/24.
+//
 
 import XCTest
 import Combine
 @testable import RestaurantsMenu
 
-class RecipeViewModelTests: XCTestCase {
+class MealListViewModelTests: XCTestCase {
 
-    var viewModel: RecipeViewModel!
+    var viewModel: MealListViewModel!
     var cancellables: Set<AnyCancellable>!
 
     override func setUp() {
         super.setUp()
-        viewModel = RecipeViewModel()
+        viewModel = MealListViewModel()
         cancellables = []
     }
 
@@ -40,21 +41,5 @@ class RecipeViewModelTests: XCTestCase {
         
         wait(for: [expectation], timeout: 5.0)
     }
-
-    func testFetchMealDetail() {
-        let expectation = XCTestExpectation(description: "Fetch meal detail")
-        
-        viewModel.$mealDetail
-            .dropFirst()
-            .sink { mealDetail in
-                XCTAssertNotNil(mealDetail)
-                XCTAssertEqual(mealDetail?.id, "52772")
-                expectation.fulfill()
-            }
-            .store(in: &cancellables)
-        
-        viewModel.fetchMealDetail(id: "52772")
-        
-        wait(for: [expectation], timeout: 5.0)
-    }
 }
+

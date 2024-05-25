@@ -6,25 +6,36 @@
 //
 
 import XCTest
-import SwiftUI
-//import ViewInspector
-@testable import RestaurantsMenu
 
-extension MealDetailView: Inspectable {}
-class MealDetailViewTests: XCTestCase {
+class MealDetailViewUITests: XCTestCase {
+
+    let app = XCUIApplication()
     
+    override func setUpWithError() throws {
+        continueAfterFailure = false
+        app.launch()
+    }
+
     func testMealDetailView() throws {
-        let viewModel = RecipeViewModel()
-        viewModel.mealDetail = MealDetail(id: "53049", name: "Apam balik", instructions: "Mix all ingredients and cook.", ingredients: ["Flour", "Sugar"], measurements: ["1 cup", "2 tbsp"])
+       
+        let firstCell = app.tables.cells.element(boundBy: 0)
+        let exists = NSPredicate(format: "exists == true")
+        expectation(for: exists, evaluatedWith: firstCell, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
         
-        let view = MealDetailView(mealID: "53049")
-        let detailView = try view.inspect().find(ViewType.VStack.self)
-        XCTAssertEqual(try detailView.findAll(ViewType.Text.self)[0].string(), "Apam balik")
-        XCTAssertEqual(try detailView.findAll(ViewType.Text.self)[1].string(), "Ingredients")
-        XCTAssertEqual(try detailView.findAll(ViewType.Text.self)[2].string(), "Flour: 1 cup")
-        XCTAssertEqual(try detailView.findAll(ViewType.Text.self)[3].string(), "Sugar: 2 tbsp")
-        XCTAssertEqual(try detailView.findAll(ViewType.Text.self)[4].string(), "Instructions")
-        XCTAssertEqual(try detailView.findAll(ViewType.Text.self)[5].string(), "Mix all ingredients and cook.")
+        firstCell.tap()
+        
+        let mealDetailTitle = app.staticTexts["Meal Details"]
+        XCTAssertTrue(mealDetailTitle.exists)
+        
+        
+        let ingredientsLabel = app.staticTexts["Ingredients"]
+        XCTAssertTrue(ingredientsLabel.exists)
+        
+        let instructionsLabel = app.staticTexts["Instructions"]
+        XCTAssertTrue(instructionsLabel.exists)
+        
+        let firstIngredient = app.staticTexts["Water: 1/2 cup"]
+        XCTAssertTrue(firstIngredient.exists)
     }
 }
-
